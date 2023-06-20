@@ -15,12 +15,6 @@
     <description>moviebookingticket</description>
     <properties>
         <java.version>11</java.version>
-        <!--     Sonarcloud-->
-
-        <sonar.projectKey>ridikQ_Spring-Boot---movie-booking-master</sonar.projectKey>
-            <sonar.organization>ridikq</sonar.organization>
-            <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-
     </properties>
     <dependencies>
         <dependency>
