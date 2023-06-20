@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/movie
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: S0saS0sa
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: none
+logging:
+  file:
+    path: /
+    name: application.log
+  level:
+    com:
+      example:
+        moviebookingticket: debug
