@@ -15,6 +15,14 @@
     <description>moviebookingticket</description>
     <properties>
         <java.version>11</java.version>
+        <!--     Sonarcloud-->
+
+            <sonar.organization>ridikq</sonar.organization>
+            <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+
+
+
     </properties>
     <dependencies>
         <dependency>
@@ -31,6 +39,7 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
 
         <dependency>
             <groupId>com.h2database</groupId>
