@@ -37,7 +37,7 @@ public class TheaterController {
     @DeleteMapping("/{id}")
     public ResponseEntity<TheaterDto> deleteTheater(@PathVariable("id") Long id) {
         theaterService.deleteTheater(id);
-        return new ResponseEntity("Theater deleted", HttpStatus.NO_CONTENT);
+        return new ResponseEntity("Theater deleted", HttpStatus.OK);
     }
     @ApiOperation(value = "Update theater")
     @PutMapping("/{id}")

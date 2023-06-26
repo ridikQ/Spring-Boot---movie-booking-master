@@ -35,7 +35,7 @@ public class MovieController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MovieDto> deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovie(id);
-        return new ResponseEntity("Movie deleted",HttpStatus.NO_CONTENT);
+        return new ResponseEntity("Movie deleted",HttpStatus.OK);
     }
     @ApiOperation(value = "Update movie")
     @PutMapping("/{id}")

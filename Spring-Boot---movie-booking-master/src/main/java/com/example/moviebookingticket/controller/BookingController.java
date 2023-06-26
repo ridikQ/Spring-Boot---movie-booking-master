@@ -40,7 +40,7 @@ public class BookingController {
     @DeleteMapping("/{id}")
     public ResponseEntity<BookingDto> deleteBooking(@PathVariable("id") Long id) {
         bookingService.deleteBooking(id);
-        return new ResponseEntity("Booking deleted", HttpStatus.NO_CONTENT);
+        return new ResponseEntity("Booking deleted", HttpStatus.OK);
     }
     @ApiOperation(value = "Update Booking")
     @PutMapping("/{id}")

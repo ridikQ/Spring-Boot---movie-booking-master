@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TheaterEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +27,12 @@ public class TheaterEntity {
 
     @Column(name="seats_available")
     private Integer seatAvailable;
+
+    public TheaterEntity(Long id, String theaterName, Integer seatAvailable) {
+        this.id = id;
+        this.theaterName = theaterName;
+        this.seatAvailable = seatAvailable;
+    }
 
     @OneToMany(mappedBy = "theater")
     private List<MovieEntity> movie = new ArrayList<>();

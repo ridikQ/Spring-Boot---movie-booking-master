@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +46,13 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private List<BookingEntity> bookingEntities = new ArrayList<>();
 
-    public UserEntity(long l, String fabio, String scali, String s, String mail, String password, String number) {
+    public UserEntity(Long id, String name, String surname, Date birthdate, String email, String password, String telephone) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.password = password;
+        this.telephone = telephone;
     }
 }

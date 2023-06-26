@@ -20,6 +20,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TimeTableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +40,14 @@ public class TimeTableEntity {
 
     @Column(name = "end_time")
     private Time endTime;
+
+    public TimeTableEntity(Long id, Date startDate, Date endDate, Time startTime, Time endTime) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     @OneToMany(mappedBy = "timeTable")
     private List<MovieEntity> movie = new ArrayList<>();

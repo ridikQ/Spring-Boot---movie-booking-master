@@ -1,10 +1,7 @@
 package com.example.moviebookingticket.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Range;
 
@@ -21,6 +18,7 @@ import java.sql.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class BookingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,4 +43,10 @@ public class BookingEntity {
     @JsonIgnore
     private MovieEntity movie;
 
+
+    public BookingEntity(Long id, Integer seatAmount, Date date) {
+        this.id = id;
+        this.seatAmount = seatAmount;
+        this.date = date;
+    }
 }
