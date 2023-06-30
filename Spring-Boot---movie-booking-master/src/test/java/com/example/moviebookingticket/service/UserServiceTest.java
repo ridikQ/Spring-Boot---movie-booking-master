@@ -1,10 +1,13 @@
 package com.example.moviebookingticket.service;
 
+import com.example.moviebookingticket.dto.BookingDto;
+import com.example.moviebookingticket.dto.UserDto;
 import com.example.moviebookingticket.entity.BookingEntity;
 import com.example.moviebookingticket.entity.UserEntity;
 import com.example.moviebookingticket.repository.UserRepository;
 import com.example.moviebookingticket.services.UserService;
 import jdk.dynalink.linker.LinkerServices;
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +15,11 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,13 +54,12 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getAllUsersTest(){
-        List<UserEntity>userEntities=new ArrayList<>();
-        userEntities.add(new UserEntity(1L,"Kentrall","Junior",new Date(2023-9-8),"kentralljunior@gmail.com","stillsteppin","235435443"));
-        Mockito.when(userRepository.findAll()).thenReturn(userEntities);
-        Assert.assertEquals(Long.valueOf(1),userEntities.get(0).getId());
-        Assert.assertEquals("Kentrall",userEntities.get(0).getName());
-        Assert.assertEquals("kentralljunior@gmail.com",userEntities.get(0).getEmail());
+    public void getAllUserTest(){
+        Page<UserEntity> userPage=Mockito.mock(Page.class);
+        when(userRepository.findAll(Mockito.any(Pageable.class))).thenReturn(userPage);
+        List<UserDto> userDto=userService.getAllUsers(1,10,"id");
+        Assertions.assertThat(userDto).isNotNull();
+
     }
 
     @Test

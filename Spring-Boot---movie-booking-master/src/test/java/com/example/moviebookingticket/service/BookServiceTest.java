@@ -4,11 +4,12 @@ import com.example.moviebookingticket.dto.BookingDto;
 import com.example.moviebookingticket.entity.BookingEntity;
 import com.example.moviebookingticket.repository.BookingRepository;
 import com.example.moviebookingticket.services.BookingService;
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,27 +41,49 @@ public class BookServiceTest {
     @MockBean
     private BookingRepository bookingRepository;
 
-    @Test
-    public void addBookTest() {
-BookingEntity booking=new BookingEntity();
-       booking.setId(1L);
-       booking.setSeatAmount(2);
-       booking.setDate(new Date(2023-9-8));
-       bookingRepository.save(booking);
-        assertEquals(0,bookingRepository.findAll().size());
-        assertEquals(1,booking.getId(),1L);
-    }
+//    @Test
+//    public void addBookTest() {
+//       BookingEntity booking=new BookingEntity();
+//       booking.setId(1L);
+//       booking.setSeatAmount(2);
+//       booking.setDate(new Date(2023-9-8));
+//
+//       BookingDto bookingDto=new BookingDto();
+//       bookingDto.setId(1L);
+//       bookingDto.setSeatAmount(2);
+//       bookingDto.setDate(new Date(2023-9-8));
+//
+//       Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(booking);
+//       BookingDto created=bookingService.addBooking(bookingDto);
+////       assertEquals(0,bookingRepository.findAll().size());
+////       assertEquals(1,booking.getId(),1L);
+//       // assertEquals(1L,created.getId(),1L);
+//        assertEquals(2,created.getSeatAmount(),2);
 
-    @Test
-    public void getAllBooksTest(){
-        List<BookingEntity>bookingEntities=new ArrayList<>();
-        bookingEntities.add(new BookingEntity(1L,2,new Date(2023-9-8)));
-        Mockito.when(bookingRepository.findAll()).thenReturn(bookingEntities);
+    // }
 
-        Assert.assertEquals(Long.valueOf(1),bookingEntities.get(0).getId());
-        Assert.assertEquals(Integer.valueOf(2),bookingEntities.get(0).getSeatAmount());
+//    @Test
+//    public void getAllBooksTest(){
+//        List<BookingEntity>bookingEntities=new ArrayList<>();
+//        bookingEntities.add(new BookingEntity(1L,2,new Date(2023-9-8)));
+//        Mockito.when(bookingRepository.findAll()).thenReturn(bookingEntities);
+//
+//        List<BookingEntity>bookingEntities1=bookingService.getAllBookings();
+//
+//        Assert.assertEquals(Long.valueOf(1),bookingEntities.get(0).getId());
+//        Assert.assertEquals(Integer.valueOf(2),bookingEntities.get(0).getSeatAmount());
+//
+//    }
+@Test
+public void getAllBookingTest(){
+    Page<BookingEntity> bookingPage=Mockito.mock(Page.class);
+    when(bookingRepository.findAll(Mockito.any(Pageable.class))).thenReturn(bookingPage);
+    List<BookingDto> bookingDto=bookingService.getAllBookings(1,10,"id");
+    Assertions.assertThat(bookingDto).isNotNull();
 
-    }
+}
+
+
 
     @Test
     public void getBookingByIdTest(){

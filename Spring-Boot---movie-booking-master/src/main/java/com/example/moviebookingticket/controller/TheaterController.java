@@ -4,13 +4,16 @@ import com.example.moviebookingticket.dto.BookingDto;
 import com.example.moviebookingticket.dto.TheaterDto;
 import com.example.moviebookingticket.dto.TimeTableDto;
 import com.example.moviebookingticket.entity.TheaterEntity;
+import com.example.moviebookingticket.services.ReportService;
 import com.example.moviebookingticket.services.TheaterService;
 import io.swagger.annotations.ApiOperation;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RestController
@@ -18,6 +21,15 @@ import java.util.List;
 public class TheaterController {
     @Autowired
     private TheaterService theaterService;
+
+    @Autowired
+    private ReportService reportService;
+
+    @GetMapping("/report/{format}")
+    public String generateReport(@PathVariable String format) throws JRException, FileNotFoundException {
+        return reportService.exportReportForTheater(format);
+    }
+
 
     @ApiOperation(value = "Get all theaters")
     @GetMapping("/all")

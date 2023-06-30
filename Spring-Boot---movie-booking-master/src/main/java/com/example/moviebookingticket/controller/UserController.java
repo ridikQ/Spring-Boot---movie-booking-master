@@ -3,14 +3,17 @@ package com.example.moviebookingticket.controller;
 import com.example.moviebookingticket.dto.UserDto;
 import com.example.moviebookingticket.entity.UserEntity;
 import com.example.moviebookingticket.repository.UserRepository;
+import com.example.moviebookingticket.services.ReportService;
 import com.example.moviebookingticket.services.UserService;
 import io.swagger.annotations.ApiOperation;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.moviebookingticket.exception.UserNotFoundException;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RestController
@@ -18,6 +21,14 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ReportService reportService;
+
+    @GetMapping("/report/{format}")
+    public String generateReport(@PathVariable String format) throws JRException, FileNotFoundException {
+        return reportService.exportReportForUser(format);
+    }
 
     @ApiOperation(value = "Get all users")
     @GetMapping("/all")
