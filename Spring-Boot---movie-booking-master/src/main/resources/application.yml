@@ -1,9 +1,33 @@
 spring:
+  h2:
+    console:
+      path: /h2
+      enabled: true
+    main:
+      allow-bean-definition-overriding: true
+
   datasource:
-    username: root
-    url: jdbc:mysql://127.0.0.1:3306/movie
-    driverClassName: com.mysql.cj.jdbc.Driver
-    password: S0saS0sa
+
+      url: jdbc:h2:mem:mydb
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+
+
+#    username: root
+#    url: jdbc:mysql://127.0.0.1:3306/movie
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    password: S0saS0sa
+
+#flyway:
+#  locations:
+#    - classpath:/db/migration
+#  baseline-on-migrate: true
+
+  flyway:
+    baseline-on-migrate: 'true'
+
+
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
@@ -20,3 +44,4 @@ logging:
   file:
     name: application.log
 startingPto: 20
+
