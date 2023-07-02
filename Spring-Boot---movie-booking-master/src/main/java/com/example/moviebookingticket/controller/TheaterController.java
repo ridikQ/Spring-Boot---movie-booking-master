@@ -6,7 +6,7 @@ import com.example.moviebookingticket.dto.TimeTableDto;
 import com.example.moviebookingticket.entity.TheaterEntity;
 import com.example.moviebookingticket.services.ReportService;
 import com.example.moviebookingticket.services.TheaterService;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiOperation;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +31,7 @@ public class TheaterController {
     }
 
 
-    @ApiOperation(value = "Get all theaters")
+
     @GetMapping("/all")
     public ResponseEntity<List<TheaterDto>>  getAllTheaters(
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -40,18 +40,18 @@ public class TheaterController {
         return new ResponseEntity<>(theaterService.getAllTheaters(pageNo,pageSize,sortBy), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Add a new theater")
+
     @PostMapping("/add")
     public ResponseEntity<TheaterDto> addTheater(@RequestBody TheaterDto theaterDto) {
         return ResponseEntity.ok(theaterService.addTheater(theaterDto)) ;
     }
-    @ApiOperation(value = "Delete theater by id")
+
     @DeleteMapping("/{id}")
     public ResponseEntity<TheaterDto> deleteTheater(@PathVariable("id") Long id) {
         theaterService.deleteTheater(id);
         return new ResponseEntity("Theater deleted", HttpStatus.OK);
     }
-    @ApiOperation(value = "Update theater")
+
     @PutMapping("/{id}")
     public ResponseEntity<TheaterDto> updateTheater(@RequestBody TheaterDto theaterDto) {
         return ResponseEntity.ok(theaterService.updateTheater(theaterDto));

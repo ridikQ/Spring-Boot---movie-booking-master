@@ -5,7 +5,7 @@ import com.example.moviebookingticket.entity.UserEntity;
 import com.example.moviebookingticket.repository.UserRepository;
 import com.example.moviebookingticket.services.ReportService;
 import com.example.moviebookingticket.services.UserService;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiOperation;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,6 @@ public class UserController {
         return reportService.exportReportForUser(format);
     }
 
-    @ApiOperation(value = "Get all users")
     @GetMapping("/all")
     public ResponseEntity<List<UserDto>> getAllUser(@RequestParam(defaultValue = "0")   Integer pageNo,
                                                     @RequestParam(defaultValue = "10") Integer pageSize,
@@ -38,19 +37,18 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(pageNo, pageSize, sortBy), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Add a new user")
     @PostMapping("/add")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
 
         return ResponseEntity.ok(userService.addUser(userDto));
     }
 
-    @ApiOperation(value = "Get user by id")
+
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
-    @ApiOperation(value = "Update user")
+
     @PutMapping ("/{id}")
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.updateUser(userDto));

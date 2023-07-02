@@ -3,7 +3,7 @@ package com.example.moviebookingticket.controller;
 import com.example.moviebookingticket.dto.BookingDto;
 import com.example.moviebookingticket.services.BookingService;
 import com.example.moviebookingticket.services.ReportService;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiOperation;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class BookingController {
         return reportService.exportReportForBooking(format);
     }
 
-    @ApiOperation(value = "Show all bookings")
+
     @GetMapping("/all")
     public ResponseEntity<List<BookingDto>> getBooking(
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -36,25 +36,24 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.getAllBookings(pageNo,pageSize,sortBy));
      }
 
-    @ApiOperation(value = "Add a new booking")
+
     @PostMapping("/add")
     public ResponseEntity<BookingDto> addBooking(@RequestBody BookingDto bookingDto) {
        return ResponseEntity.ok(bookingService.addBooking(bookingDto));
     }
 
-    @ApiOperation(value = "Get a booking by id")
+//    @ApiOperation(value = "Get a booking by id")
     @GetMapping("/{id}")
     public ResponseEntity<BookingDto> getBookingById(@PathVariable("id")Long id){
       return ResponseEntity.ok(bookingService.getBookingById(id));
     }
 
-    @ApiOperation(value = "Delete booking by id")
     @DeleteMapping("/{id}")
     public ResponseEntity<BookingDto> deleteBooking(@PathVariable("id") Long id) {
         bookingService.deleteBooking(id);
         return new ResponseEntity("Booking deleted", HttpStatus.OK);
     }
-    @ApiOperation(value = "Update Booking")
+
     @PutMapping("/{id}")
     public ResponseEntity<BookingDto> updateBooking(@RequestBody BookingDto bookingDto) {
         return ResponseEntity.ok(bookingService.updateBooking(bookingDto));

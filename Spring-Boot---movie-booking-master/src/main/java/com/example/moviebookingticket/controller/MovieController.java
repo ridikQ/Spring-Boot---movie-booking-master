@@ -3,7 +3,7 @@ package com.example.moviebookingticket.controller;
 import com.example.moviebookingticket.dto.MovieDto;
 import com.example.moviebookingticket.services.MovieService;
 import com.example.moviebookingticket.services.ReportService;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiOperation;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,6 @@ public class MovieController {
         return reportService.exportReportForMovie(format);
     }
 
-    @ApiOperation(value = "Get all movies")
     @GetMapping("/all")
     public ResponseEntity< List<MovieDto>> getAllMovies(
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -36,19 +35,19 @@ public class MovieController {
         return new ResponseEntity<>(movieService.getAllMovies(pageNo,pageSize,sortBy), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Add a new movie")
+
     @PostMapping("/add")
     public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto){
         return ResponseEntity.ok(movieService.addMovie(movieDto));
     }
 
-    @ApiOperation(value = "Delete movie by id")
+
     @DeleteMapping("/{id}")
     public ResponseEntity<MovieDto> deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovie(id);
         return new ResponseEntity("Movie deleted",HttpStatus.OK);
     }
-    @ApiOperation(value = "Update movie")
+
     @PutMapping("/{id}")
     public ResponseEntity<MovieDto> updateMovie(@RequestBody MovieDto movieDto) {
         return ResponseEntity.ok(movieService.updateMovie(movieDto));
