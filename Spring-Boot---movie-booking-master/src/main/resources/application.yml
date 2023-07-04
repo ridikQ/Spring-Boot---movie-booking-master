@@ -8,24 +8,36 @@ spring:
 
   datasource:
 
-      url: jdbc:h2:mem:mydb
-      username: sa
-      password:
-      driver-class-name: org.h2.Driver
+#      url: jdbc:h2:mem:mydb
+#      username: sa
+#      password:
+#      driver-class-name: org.h2.Driver
 
 
-#    username: root
-#    url: jdbc:mysql://127.0.0.1:3306/movie
-#    driverClassName: com.mysql.cj.jdbc.Driver
-#    password: S0saS0sa
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 28972a0e580a33dadd87
+            client-secret: c7f4cd29f8b74fc926fac64cdae8abd8e6170cac
+          google:
+           client-id: 547814275679-vc1qst338h3q3r81i3eqq6jg3u7665ka.apps.googleusercontent.com
+           client-secret: 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
+
+
+
+
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/movie
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: S0saS0sa
 
 flyway:
   locations:
   - classpath:db/migration
   baselineOnMigrate: true
   table: SCHEMA_HISTORY
-
-
 
 
 
@@ -45,11 +57,13 @@ management:
       ddl-auto: none
 logging:
   level:
-    org.springframework.web: ERROR
+    org.springframework.web: TRACE
   pattern:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
   file:
     name: application.log
 startingPto: 20
+
+
 
