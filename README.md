@@ -23,3 +23,5 @@ You need [Java](https://www.oracle.com/java/technologies/javase/jdk11-archive-do
 - MySQL database
 - Lombok
 - Open API
+- Flyway
+- OAuth2
