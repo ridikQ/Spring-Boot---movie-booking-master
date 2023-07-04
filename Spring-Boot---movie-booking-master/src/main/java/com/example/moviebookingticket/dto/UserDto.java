@@ -1,7 +1,7 @@
 package com.example.moviebookingticket.dto;
 
 import lombok.*;
-import javax.validation.constraints.Null;
+
 import java.util.Date;
 
 @Getter

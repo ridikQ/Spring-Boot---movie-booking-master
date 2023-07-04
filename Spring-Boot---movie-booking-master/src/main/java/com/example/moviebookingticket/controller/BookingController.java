@@ -26,8 +26,6 @@ public class BookingController {
     public String generateReport(@PathVariable String format) throws JRException, FileNotFoundException {
         return reportService.exportReportForBooking(format);
     }
-
-
     @GetMapping("/all")
     public ResponseEntity<List<BookingDto>> getBooking(
             @RequestParam(defaultValue = "0") Integer pageNo,

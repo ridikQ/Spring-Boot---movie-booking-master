@@ -1,10 +1,10 @@
 package com.example.moviebookingticket.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;

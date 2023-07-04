@@ -1,11 +1,12 @@
 package com.example.moviebookingticket.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
-import org.hibernate.annotations.Where;
-import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

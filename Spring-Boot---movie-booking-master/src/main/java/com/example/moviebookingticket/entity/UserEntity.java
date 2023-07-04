@@ -1,11 +1,11 @@
 package com.example.moviebookingticket.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

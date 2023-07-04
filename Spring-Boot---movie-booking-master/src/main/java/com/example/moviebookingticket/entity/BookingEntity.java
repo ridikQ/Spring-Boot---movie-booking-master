@@ -1,14 +1,17 @@
 package com.example.moviebookingticket.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Range;
+import jakarta.persistence.*;
+import lombok.*;
+import java.sql.Date;
+import jakarta.validation.constraints.FutureOrPresent;
 
-import javax.persistence.*;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Size;
 import java.sql.Date;
 
 
