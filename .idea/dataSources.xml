@@ -8,11 +8,11 @@
       <jdbc-url>jdbc:h2:mem:mydb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="movie@127.0.0.1" uuid="64db76ad-8bad-4a38-ba2e-62a36e585360">
+    <data-source source="LOCAL" name="@localhost" uuid="1efee03b-cbc8-4c33-95e5-8c87f0c96be1">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:3306/movie</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

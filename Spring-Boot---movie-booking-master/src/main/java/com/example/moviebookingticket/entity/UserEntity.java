@@ -1,5 +1,6 @@
 package com.example.moviebookingticket.entity;
 
+import com.example.moviebookingticket.token.Token;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -49,6 +50,9 @@ public class UserEntity implements UserDetails {
     @Column(name= "role")
     @Enumerated(EnumType.STRING)
     private RoleEntity role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token>tokens;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
