@@ -10,6 +10,7 @@ import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.example.moviebookingticket.exception.UserNotFoundException;
 
@@ -31,6 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<List<UserDto>> getAllUser(@RequestParam(defaultValue = "0")   Integer pageNo,
                                                     @RequestParam(defaultValue = "10") Integer pageSize,
                                                     @RequestParam(defaultValue = "id") String sortBy) {
@@ -38,6 +40,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('USER')")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
 
         return ResponseEntity.ok(userService.addUser(userDto));
@@ -45,11 +48,13 @@ public class UserController {
 
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PutMapping ("/{id}")
+    @PreAuthorize("hasAnyAuthority('USER')")
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.updateUser(userDto));
     }

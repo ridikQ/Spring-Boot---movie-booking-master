@@ -8,6 +8,7 @@ import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
@@ -28,6 +29,7 @@ public class MovieController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity< List<MovieDto>> getAllMovies(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
@@ -37,18 +39,21 @@ public class MovieController {
 
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto){
         return ResponseEntity.ok(movieService.addMovie(movieDto));
     }
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<MovieDto> deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovie(id);
         return new ResponseEntity("Movie deleted",HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<MovieDto> updateMovie(@RequestBody MovieDto movieDto) {
         return ResponseEntity.ok(movieService.updateMovie(movieDto));
     }

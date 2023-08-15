@@ -11,6 +11,7 @@ import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
@@ -33,6 +34,7 @@ public class TheaterController {
 
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<List<TheaterDto>>  getAllTheaters(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
@@ -42,17 +44,20 @@ public class TheaterController {
 
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<TheaterDto> addTheater(@RequestBody TheaterDto theaterDto) {
         return ResponseEntity.ok(theaterService.addTheater(theaterDto)) ;
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<TheaterDto> deleteTheater(@PathVariable("id") Long id) {
         theaterService.deleteTheater(id);
         return new ResponseEntity("Theater deleted", HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<TheaterDto> updateTheater(@RequestBody TheaterDto theaterDto) {
         return ResponseEntity.ok(theaterService.updateTheater(theaterDto));
     }

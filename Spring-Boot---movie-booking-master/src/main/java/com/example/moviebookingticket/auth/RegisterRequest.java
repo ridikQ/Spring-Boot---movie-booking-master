@@ -1,5 +1,6 @@
 package com.example.moviebookingticket.auth;
 
+import com.example.moviebookingticket.entity.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,5 @@ public class RegisterRequest {
     private String lastName;
     private String email;
     private String password;
+    private RoleEntity role;
 }

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
@@ -32,11 +33,13 @@ public class TimeTableController {
 
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<TimeTableDto>addTimeTable(@RequestBody TimeTableDto timeTableDto) {
        return ResponseEntity.ok(timeTableService.addTimeTable(timeTableDto));
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<TimeTableDto> updateTimeTable(@RequestBody TimeTableDto timeTableDto) {
         return ResponseEntity.ok(timeTableService.updateTimeTable(timeTableDto));
     }

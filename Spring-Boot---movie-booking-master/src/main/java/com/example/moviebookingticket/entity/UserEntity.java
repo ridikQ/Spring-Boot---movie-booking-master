@@ -24,7 +24,7 @@ import java.util.List;
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, updatable = false, nullable = false)
+  //  @Column(name = "id", unique = true, updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "name")
@@ -37,7 +37,7 @@ public class UserEntity implements UserDetails {
     private Date birthdate;
 
  //   @NotEmpty(message = "Email is mandatory")
-    @Column(name = "email",unique = true)
+    @Column(name = "email")
     private String email;
 
  //   @NotEmpty(message = "Password is mandatory")
@@ -58,19 +58,19 @@ public class UserEntity implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<BookingEntity> bookingEntities = new ArrayList<>();
 
-    public UserEntity(Long id, String name, String surname, Date birthdate, String email, String password, String telephone) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.birthdate = birthdate;
-        this.email = email;
-        this.password = password;
-        this.telephone = telephone;
-    }
+//    public UserEntity(Long id, String name, String surname, Date birthdate, String email, String password, String telephone) {
+//        this.id = id;
+//        this.name = name;
+//        this.surname = surname;
+//        this.birthdate = birthdate;
+//        this.email = email;
+//        this.password = password;
+//        this.telephone = telephone;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override
