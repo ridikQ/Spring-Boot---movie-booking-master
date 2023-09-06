@@ -10,9 +10,6 @@ import org.hibernate.validator.constraints.Range;
 import jakarta.persistence.*;
 import lombok.*;
 import java.sql.Date;
-import jakarta.validation.constraints.FutureOrPresent;
-
-import java.sql.Date;
 
 
 @Entity
@@ -33,7 +30,6 @@ public class BookingEntity {
     private Integer seatAmount;
 
     @Column(name = "date")
-    @FutureOrPresent
     private Date date;
 
     @ManyToOne

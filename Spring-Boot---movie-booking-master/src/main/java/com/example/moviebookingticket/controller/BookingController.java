@@ -27,7 +27,7 @@ public class BookingController {
         return reportService.exportReportForBooking(format);
     }
     @GetMapping("/all")
-    @PreAuthorize("hasAnyAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<List<BookingDto>> getBooking(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,

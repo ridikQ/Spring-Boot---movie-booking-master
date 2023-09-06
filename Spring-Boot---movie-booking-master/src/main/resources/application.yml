@@ -37,7 +37,7 @@ spring:
 
     datasource:
       username: root
-      url: jdbc:mysql://localhost:3306/jwt_security
+      url: jdbc:mysql://localhost:3306/ritreez
       password: S0saS0sa
       jpa:
         hibernate:
@@ -60,7 +60,17 @@ spring:
 #  - classpath:db/migration
 #  baselineOnMigrate: true
 #  table: SCHEMA_HISTORY
-
+    mail:
+      properties:
+        mail:
+          smtp:
+            starttls:
+              enable: 'true'
+            auth: 'true'
+      host: smtp.gmail.com
+      username: ridikqendro@gmail.com
+      password: diveskmxeqytyoqc
+      port: '587'
 
 
 management:
@@ -86,9 +96,9 @@ application:
   security:
     jwt:
       secret-key: cad25a4794c6ca50a56cfa3ba2c450c381561045baf6d3c1c276f3cf43744c56
-      expiration: 86400000  # a minute 60000
+      expiration: 86400000   # a minute 60000
       refresh-token:
-        expiration: 604800000  # a week
+        expiration: 604800000   # a week
 
 
 

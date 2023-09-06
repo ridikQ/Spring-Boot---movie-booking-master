@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -21,11 +23,9 @@ public class TimeTableEntity {
     @Column(name = "id", unique = true, updatable = false, nullable = false)
     private Long id;
 
-    @FutureOrPresent(message = "Date need to be in the present or in the future")
     @Column(name = "start_date")
     private Date startDate;
 
-    @FutureOrPresent(message = "Date need to be in the present or in the future")
     @Column(name="end_date")
     private Date endDate;
 

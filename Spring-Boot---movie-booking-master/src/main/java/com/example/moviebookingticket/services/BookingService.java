@@ -2,6 +2,7 @@ package com.example.moviebookingticket.services;
 
 import com.example.moviebookingticket.converters.BookingConverter;
 import com.example.moviebookingticket.dto.BookingDto;
+import com.example.moviebookingticket.dto.EmailMessage;
 import com.example.moviebookingticket.dto.TimeTableDto;
 import com.example.moviebookingticket.entity.BookingEntity;
 import com.example.moviebookingticket.entity.MovieEntity;
@@ -18,6 +19,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -28,11 +31,16 @@ public class BookingService {
 
     private static final Logger log = LoggerFactory.getLogger(BookingService.class);
 
+    java.util.Date date = new java.util.Date();
+
     @Autowired
     private BookingRepository bookingRepository;
 
     @Autowired
     private BookingConverter bookingConverter;
+
+    @Autowired
+    private EmailService emailService;
 
     public List<BookingDto> getAllBookings(Integer pageNo,Integer pageSize,String sortBy) {
         Pageable paging= PageRequest.of(pageNo,pageSize, Sort.by(sortBy));
@@ -52,6 +60,14 @@ public class BookingService {
             throw new InvalidDateTimeException("Date does not exist");
         }
         else {
+            EmailMessage message=new EmailMessage();
+            message.setTo(bookingEntity.getUser().getEmail());
+            message.setSubject("Booking accepted");
+            message.setMessage("Your request has been ACCEPTED" + "\r\n" + "Request details: " + "\r\n" +
+                    "Movie name: " + bookingEntity.getMovie().getName() + "\r\n" + "Starting:  " + bookingEntity.getDate() +"\r\n" + "ending:  "+bookingEntity.getMovie().getTimeTable().getStartTime()+
+                    "\r\n" + "Number of seats: " + bookingEntity.getSeatAmount() + "\r\n" + "Request created on " + date + "\r\n" +
+                    "Have a great time :)");
+            emailService.sendMail(message);
             Integer seatTotal=bookingEntity.getMovie().getTheater().getSeatAvailable()-bookingEntity.getSeatAmount();
             bookingEntity.getMovie().getTheater().setSeatAvailable(seatTotal);
             bookingRepository.save(bookingEntity);

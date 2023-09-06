@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class UserEntity implements UserDetails {
     private String surname;
 
     @Column(name = "birthdate")
-    private Date birthdate;
+    private LocalDate birthdate;
 
  //   @NotEmpty(message = "Email is mandatory")
     @Column(name = "email")
@@ -58,15 +59,15 @@ public class UserEntity implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<BookingEntity> bookingEntities = new ArrayList<>();
 
-//    public UserEntity(Long id, String name, String surname, Date birthdate, String email, String password, String telephone) {
-//        this.id = id;
-//        this.name = name;
-//        this.surname = surname;
-//        this.birthdate = birthdate;
-//        this.email = email;
-//        this.password = password;
-//        this.telephone = telephone;
-//    }
+    public UserEntity(Long id, String name, String surname, LocalDate birthdate, String email, String password, String telephone) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.password = password;
+        this.telephone = telephone;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

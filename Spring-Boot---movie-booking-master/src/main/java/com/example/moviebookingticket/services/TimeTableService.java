@@ -33,11 +33,11 @@ public class TimeTableService {
                 throw new InvalidDateException("Enter a valid date");
     }
         else {
-            TimeTableEntity timeTableEntity = timeTableConverter.toEntity(timeTableDto);
+      TimeTableEntity timeTableEntity = timeTableConverter.toEntity(timeTableDto);
             timeTableRepository.save(timeTableEntity);
             return timeTableDto;
         }
-    }
+       }
     public TimeTableDto updateTimeTable(TimeTableDto timeTableDto) {
         TimeTableEntity timeTableEntity = timeTableConverter.toEntity(timeTableDto);
         timeTableRepository.save(timeTableEntity);

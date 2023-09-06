@@ -2,7 +2,7 @@ package com.example.moviebookingticket.dto;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -16,7 +16,7 @@ public class UserDto {
 
     private String surname;
 
-    private Date birthdate;
+    private LocalDate birthdate;
 
     private String email;
 

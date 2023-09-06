@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Getter
@@ -18,7 +20,7 @@ public class TimeTableDto {
 
     private Date endDate;
 
-    private  Time startTime;
+    private Time startTime;
 
     private Time endTime;
 
