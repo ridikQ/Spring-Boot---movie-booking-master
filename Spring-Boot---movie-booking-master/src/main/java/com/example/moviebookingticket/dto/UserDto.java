@@ -24,4 +24,6 @@ public class UserDto {
 
     private String telephone;
 
+    private RoleDto role;
+
 }

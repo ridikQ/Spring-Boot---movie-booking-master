@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name = "\"user\"")
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Builder
 public class UserEntity implements UserDetails {
@@ -48,6 +48,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "telephone")
     private String telephone;
 
+    @NonNull
     @Column(name= "role")
     @Enumerated(EnumType.STRING)
     private RoleEntity role;
