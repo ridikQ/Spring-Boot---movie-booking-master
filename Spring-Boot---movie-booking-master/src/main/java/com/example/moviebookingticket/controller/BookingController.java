@@ -3,6 +3,7 @@ package com.example.moviebookingticket.controller;
 import com.example.moviebookingticket.dto.BookingDto;
 import com.example.moviebookingticket.services.BookingService;
 import com.example.moviebookingticket.services.ReportService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+@Tag(name = "Booking", description = "Booking management APIs")
 @RestController
 @RequestMapping(path = "/bookings")
 public class BookingController {

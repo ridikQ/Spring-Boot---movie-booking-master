@@ -7,6 +7,7 @@ import com.example.moviebookingticket.entity.TheaterEntity;
 import com.example.moviebookingticket.services.ReportService;
 import com.example.moviebookingticket.services.TheaterService;
 //import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+@Tag(name = "Theater", description = "Theater management APIs")
 @RestController
 @RequestMapping(path = "/theaters")
 public class TheaterController {

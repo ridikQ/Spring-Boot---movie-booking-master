@@ -7,22 +7,30 @@ import com.example.moviebookingticket.dto.TimeTableDto;
 import com.example.moviebookingticket.entity.BookingEntity;
 import com.example.moviebookingticket.entity.MovieEntity;
 import com.example.moviebookingticket.entity.TimeTableEntity;
+import com.example.moviebookingticket.exception.CustomUserException;
 import com.example.moviebookingticket.exception.InvalidDateException;
 import com.example.moviebookingticket.exception.InvalidDateTimeException;
+import com.example.moviebookingticket.exception.UserNotFoundException;
 import com.example.moviebookingticket.repository.BookingRepository;
+import com.example.moviebookingticket.repository.MovieRepository;
+import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -35,6 +43,9 @@ public class BookingService {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     @Autowired
     private BookingConverter bookingConverter;
@@ -91,7 +102,23 @@ public class BookingService {
         bookingRepository.save(bookingEntity);
         return bookingDto;
     }
-
-
+    public boolean doesMovieExist(Long id) {
+        return movieRepository.existsById(id);
     }
+    public List<BookingDto>getBookingByMovieId(Long movieId,Integer pageNo, Integer pageSize, String sortBy){
+        if (doesMovieExist(movieId)==true){
+            Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+            Page<BookingEntity> page = bookingRepository.getAllByMovieId(movieId, pageable);
+          return page
+                  .stream()
+                   .map(bookingConverter::toDto)
+                    .collect(Collectors.toList());
+        }
+        else {
+            throw new CustomUserException("Movie with ID " + movieId + " not found");
+        }
+    }
+    }
+
+
 

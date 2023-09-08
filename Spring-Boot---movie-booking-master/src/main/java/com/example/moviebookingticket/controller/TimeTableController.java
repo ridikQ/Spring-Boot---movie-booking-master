@@ -7,6 +7,7 @@ import com.example.moviebookingticket.exception.InvalidDateException;
 import com.example.moviebookingticket.services.ReportService;
 import com.example.moviebookingticket.services.TimeTableService;
 //import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
 
+@Tag(name = "Timetable", description = "Timetable management APIs")
 @RestController
 @RequestMapping(path = "/timetables")
 public class TimeTableController {

@@ -6,6 +6,7 @@ import com.example.moviebookingticket.repository.UserRepository;
 import com.example.moviebookingticket.services.ReportService;
 import com.example.moviebookingticket.services.UserService;
 //import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import com.example.moviebookingticket.exception.UserNotFoundException;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+@Tag(name = "User", description = "User management APIs")
 @RestController
 @RequestMapping(path = "/users")
 public class UserController {
