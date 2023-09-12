@@ -25,8 +25,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.awt.print.Book;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -91,11 +94,18 @@ public class BookingService {
    }
 
         public boolean deleteBooking(Long id) {
+
             BookingEntity bookingEntity = bookingRepository.getById(id);
-            Integer seatTotal=bookingEntity.getMovie().getTheater().getSeatAvailable()+bookingEntity.getSeatAmount();
-            bookingEntity.getMovie().getTheater().setSeatAvailable(seatTotal);
-            bookingRepository.deleteById(id);
-            return true;
+            if (Time.valueOf(LocalTime.now()).compareTo(bookingEntity.getMovie().getTimeTable().getStartTime())<=2){
+                throw new InvalidDateTimeException("You cannont delete booking 2 hours before the starting time");
+            }
+            else {
+                Integer seatTotal=bookingEntity.getMovie().getTheater().getSeatAvailable()+bookingEntity.getSeatAmount();
+                bookingEntity.getMovie().getTheater().setSeatAvailable(seatTotal);
+                bookingRepository.deleteById(id);
+                return true;
+            }
+
         }
     public BookingDto updateBooking(BookingDto bookingDto) {
         BookingEntity bookingEntity = bookingConverter.toEntity(bookingDto);

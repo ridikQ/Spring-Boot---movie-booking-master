@@ -28,6 +28,9 @@ public class TheaterEntity {
     @Column(name="seats_available")
     private Integer seatAvailable;
 
+    @Transient // This field won't be mapped to the database
+    private boolean hasMovies;
+
     public TheaterEntity(Long id, String theaterName, Integer seatAvailable) {
         this.id = id;
         this.theaterName = theaterName;
@@ -37,4 +40,7 @@ public class TheaterEntity {
     @OneToMany(mappedBy = "theater")
     private List<MovieEntity> movie = new ArrayList<>();
 
+    public boolean isHasMovies() {
+        return !movie.isEmpty();
+    }
 }

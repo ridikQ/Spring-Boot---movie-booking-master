@@ -2,6 +2,7 @@ package com.example.moviebookingticket.controller;
 
 import com.example.moviebookingticket.dto.BookingDto;
 import com.example.moviebookingticket.dto.MovieDto;
+import com.example.moviebookingticket.exception.ResourceNotFoundException;
 import com.example.moviebookingticket.services.BookingService;
 import com.example.moviebookingticket.services.MovieService;
 import com.example.moviebookingticket.services.ReportService;

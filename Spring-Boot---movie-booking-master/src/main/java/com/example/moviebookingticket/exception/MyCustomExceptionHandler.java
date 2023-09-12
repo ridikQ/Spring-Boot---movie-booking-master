@@ -66,6 +66,24 @@ public class MyCustomExceptionHandler {
 
 		return new ResponseEntity<Object>(errorBody,HttpStatus.BAD_REQUEST);
 	}
+	@ExceptionHandler(value = {MovieHasBookingException.class })
+	protected ResponseEntity<Object> handleMovieHasBookingException( RuntimeException ex) {
+		ErrorFormat errorBody=new ErrorFormat();
+		errorBody.setMessage(ex.getMessage());
+		errorBody.setTimeStamp(new Date());
+		errorBody.setSuggestion("Chose another movie");
+
+		return new ResponseEntity<Object>(errorBody,HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(value = {TheaterHasMoviesException.class })
+	protected ResponseEntity<Object> handleTheaterHasMoviesException( RuntimeException ex) {
+		ErrorFormat errorBody=new ErrorFormat();
+		errorBody.setMessage(ex.getMessage());
+		errorBody.setTimeStamp(new Date());
+		errorBody.setSuggestion("Chose another theater");
+
+		return new ResponseEntity<Object>(errorBody,HttpStatus.BAD_REQUEST);
+	}
 
 
 

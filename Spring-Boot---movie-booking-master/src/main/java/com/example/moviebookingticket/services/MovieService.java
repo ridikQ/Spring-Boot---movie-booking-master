@@ -9,6 +9,8 @@ import com.example.moviebookingticket.entity.MovieEntity;
 import com.example.moviebookingticket.entity.TheaterEntity;
 import com.example.moviebookingticket.entity.TimeTableEntity;
 import com.example.moviebookingticket.exception.IllegalStateException;
+import com.example.moviebookingticket.exception.MovieHasBookingException;
+import com.example.moviebookingticket.exception.ResourceNotFoundException;
 import com.example.moviebookingticket.repository.BookingRepository;
 import com.example.moviebookingticket.repository.MovieRepository;
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,13 +58,13 @@ public class MovieService {
         }
     }
 
-    public void deleteMovie(Long id) {
-        BookingEntity bookingEntity = bookingRepository.getById(id);
-        if (bookingRepository.existsById(bookingEntity.getId())) {
-            log.error("Movie is already booked");
-        } else {
-            movieRepository.deleteById(id);
+    @Transactional
+    public void deleteMovie(Long id) throws MovieHasBookingException {
+        MovieEntity movieEntity=movieRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Movie does not exist"));
+        if (movieEntity.isHasBooking()){
+            throw new MovieHasBookingException("Movie is already booked and cannont be deleted");
         }
+        movieRepository.delete(movieEntity);
     }
     public MovieDto updateMovie(MovieDto movieDto) {
         MovieEntity movieEntity = movieConverter.toEntity(movieDto);

@@ -34,7 +34,10 @@ public class MovieEntity {
     @Column(name = "rating")
     private Double rating;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @Transient
+    private boolean hasBooking;
+
+    @ManyToOne
     @JoinColumn(name = "theater_id")
     @JsonIgnore
     private TheaterEntity theater;
@@ -47,6 +50,9 @@ public class MovieEntity {
     @OneToMany(mappedBy = "movie")
     private List<BookingEntity> bookingEntities = new ArrayList<>();
 
+    public boolean isHasBooking() {
+        return !bookingEntities.isEmpty();
+    }
     public MovieEntity(Long id, String name, String type, String technology, Double rating) {
         this.id = id;
         this.name = name;
