@@ -17,12 +17,12 @@ You need [Java](https://www.oracle.com/java/technologies/javase/jdk11-archive-do
 3.Go to http://localhost:8080/swagger-ui.html
 
 ## Features
-User registration and login with JWT authentication
-Password encryption using BCrypt
-Role-based authorization with Spring Security
-Customized access denied handling
-Logout mechanism
-Refresh token
+- User registration and login with JWT authentication
+- Password encryption using BCrypt
+- Role-based authorization with Spring Security
+- Customized access denied handling
+- Logout mechanism
+- Refresh token
 
 ## Tech Stack used in the project:
 - Java 17
