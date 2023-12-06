@@ -1,4 +1,4 @@
-(https://github.com/ridikQ/Spring-Boot---movie-booking-master/assets/57288984/4235be94-6bd3-485e-9fc9-0324f29d0914)# Spring-Boot---movie-booking-master
+# Spring-Boot---movie-booking-master
 This is a simple movie booking project made with java and spring boot framework.
 Project made with intuit to learn java spring boot framework
 ## Database
